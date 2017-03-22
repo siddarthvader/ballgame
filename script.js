@@ -1,6 +1,3 @@
-
-
-
 (function () {
 	var init = function () {
 		var c = document.getElementById('game');
@@ -186,7 +183,18 @@
 
 		blink('.header-name');
 
+		function fixHigh(){
+			var prev=document.getElementsByClassName('high-value')[0]?parseInt(document.getElementsByClassName('high-value')[0]):0;
+			if(isNaN(prev)){
+				prev=0;
+			}	
 
+			if(score>=prev){
+				$('.high-value').html(score);
+			}
+			$('.score-value').html(0);	
+
+		}
 
 		function gameOver() {
 			d.clearRect(0, 0, c.width, c.height);
@@ -196,6 +204,7 @@
 			$(document).keydown(false);
 
 			setTimeout(function () {
+				fixHigh()
 				var oldcanv = document.getElementsByClassName('gamecanvas')[0];
 				document.getElementsByClassName('wrapper')[0].removeChild(oldcanv)
 				var canv=document.createElement('canvas');
